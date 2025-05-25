@@ -40,10 +40,21 @@ services:
     networks:
       - datvirnet
 
+  mongodb:
+    image: mongo:6.0.14
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+      - ./migrations/mongo:/docker-entrypoint-initdb.d
+    networks:
+      - datvirnet
+
 volumes:
   pgdata:
   tsdata:
   chdata:
+  mongodata:
 
 networks:
   datvirnet:
