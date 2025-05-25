@@ -29,9 +29,21 @@ services:
     networks:
       - datvirnet
 
+  clickhouse:
+    image: clickhouse/clickhouse-server:25.5-alpine
+    ports:
+      - "8123:8123"
+      - "9123:9000"
+    volumes:
+      - chdata:/var/lib/clickhouse
+      - ./migrations/clickhouse:/docker-entrypoint-initdb.d
+    networks:
+      - datvirnet
+
 volumes:
   pgdata:
   tsdata:
+  chdata:
 
 networks:
   datvirnet:
