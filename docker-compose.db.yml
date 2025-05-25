@@ -15,8 +15,23 @@ services:
     networks:
       - datvirnet
 
+  timescaledb:
+    image: timescale/timescaledb-ha:pg16
+    environment:
+      POSTGRES_USER: datviruser
+      POSTGRES_PASSWORD: datvirpass
+      POSTGRES_DB: datvirdb
+    ports:
+      - "5433:5432"
+    volumes:
+      - tsdata:/var/lib/postgresql/data
+      - ./migrations/timescale:/docker-entrypoint-initdb.d
+    networks:
+      - datvirnet
+
 volumes:
   pgdata:
+  tsdata:
 
 networks:
   datvirnet:
