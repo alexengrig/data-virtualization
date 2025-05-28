@@ -34,7 +34,7 @@ CREATE TABLE grades
 (
     id            SERIAL PRIMARY KEY,
     enrollment_id INT REFERENCES enrollments (id),
-    grade         TEXT, -- буквенные оценки (A, B, C, D, F)
+    grade         TEXT,
     exam_date     DATE
 );
 

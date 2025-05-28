@@ -10,7 +10,7 @@ BASE_DIR.mkdir(parents=True, exist_ok=True)
 
 fake = Faker()
 
-# ---------- platform_events.csv ----------
+# --- platform_events.csv ---
 event_types = ['login', 'view', 'submit', 'download']
 device_types = ['desktop', 'mobile', 'tablet']
 start_time = datetime.now() - timedelta(days=30)
@@ -30,7 +30,7 @@ with open(BASE_DIR / 'platform_events.csv', 'w', newline='') as f:
             random.choice(device_types)
         ])
 
-# ---------- teaching_summary.csv ----------
+# --- teaching_summary.csv ---
 semesters = ['2023-Fall', '2024-Spring', '2024-Fall']
 departments = ['Physics', 'Mathematics', 'Computer Science', 'Economics', 'History']
 

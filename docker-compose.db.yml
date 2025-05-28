@@ -1,4 +1,4 @@
-name: datvir
+name: datvirdb
 
 services:
   postgres:
@@ -10,12 +10,12 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
-      - ./migrations/postgres:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres:/docker-entrypoint-initdb.d
     networks:
-      - datvirnet
+      - dbnet
 
-  timescaledb:
+  timescale:
     image: timescale/timescaledb-ha:pg16
     environment:
       POSTGRES_USER: datviruser
@@ -24,37 +24,45 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - tsdata:/var/lib/postgresql/data
-      - ./migrations/timescale:/docker-entrypoint-initdb.d
+      - timescale_data:/var/lib/postgresql/data
+      - ./timescale:/docker-entrypoint-initdb.d
     networks:
-      - datvirnet
+      - dbnet
 
   clickhouse:
     image: clickhouse/clickhouse-server:25.5-alpine
+    environment:
+      CLICKHOUSE_USER: datviruser
+      CLICKHOUSE_PASSWORD: datvirpass
+      CLICKHOUSE_DB: datvirdb
     ports:
       - "8123:8123"
       - "9123:9000"
     volumes:
-      - chdata:/var/lib/clickhouse
-      - ./migrations/clickhouse:/docker-entrypoint-initdb.d
+      - clickhouse_data:/var/lib/clickhouse
+      - ./clickhouse:/docker-entrypoint-initdb.d
     networks:
-      - datvirnet
+      - dbnet
 
-  mongodb:
+  mongo:
     image: mongo:6.0.14
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: datviruser
+      MONGO_INITDB_ROOT_PASSWORD: datvirpass
     ports:
       - "27017:27017"
     volumes:
-      - mongodata:/data/db
-      - ./migrations/mongo:/docker-entrypoint-initdb.d
+      - mongo_data:/data/db
+      - ./mongo:/docker-entrypoint-initdb.d
     networks:
-      - datvirnet
+      - dbnet
 
 volumes:
-  pgdata:
-  tsdata:
-  chdata:
-  mongodata:
+  postgres_data:
+  timescale_data:
+  clickhouse_data:
+  mongo_data:
 
 networks:
-  datvirnet:
+  dbnet:
+    name: datvirdbnet

@@ -9,6 +9,7 @@ BASE_DIR.mkdir(parents=True, exist_ok=True)
 
 fake = Faker()
 
+# --- sensor_data.csv ---
 sensor_types = ['temperature', 'humidity', 'co2']
 auditoriums = [f'B1-{i:03}' for i in range(1, 21)] + \
               [f'A2-{i:03}' for i in range(1, 21)] + \
