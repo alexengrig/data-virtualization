@@ -1,0 +1,24 @@
+name: datvirdremio
+
+services:
+  dremio:
+    image: dremio/dremio-oss:26.0
+    environment:
+      DREMIO_USERNAME: datviruser
+      DREMIO_PASSWORD: datvirpass
+    ports:
+      - "9047:9047"
+      - "31010:31010"
+      - "45678:45678"
+    volumes:
+      - dremio_data:/opt/dremio/data
+    networks:
+      - dbnet
+
+volumes:
+  dremio_data:
+
+networks:
+  dbnet:
+    name: datvirdbnet
+    external: true
