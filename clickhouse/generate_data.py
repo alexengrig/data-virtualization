@@ -21,7 +21,7 @@ with open(BASE_DIR / 'platform_events.csv', 'w', newline='') as f:
         dt = start_time + timedelta(seconds=random.randint(0, 30 * 86400))
         writer.writerow([
             dt.date().isoformat(),
-            dt.strftime('%Y-%m-%d %H:%M:%S'),  # ← исправлен формат без микросекунд
+            dt.strftime('%Y-%m-%d %H:%M:%S'),
             random.randint(1, 10000),
             random.randint(1, 100),
             random.randint(1, 50),

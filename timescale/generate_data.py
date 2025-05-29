@@ -13,11 +13,11 @@ fake = Faker()
 sensor_types = ['temperature', 'humidity', 'co2']
 auditoriums = [f'B1-{i:03}' for i in range(1, 21)] + \
               [f'A2-{i:03}' for i in range(1, 21)] + \
-              [f'C3-{i:03}' for i in range(1, 21)]  # 60 аудиторий
+              [f'C3-{i:03}' for i in range(1, 21)]
 
 start_time = datetime.now() - timedelta(days=30)
 interval = timedelta(minutes=30)
-rows_per_auditorium = int((30 * 24 * 60) / 30)  # 30 дней × 48 замеров в день
+rows_per_auditorium = int((30 * 24 * 60) / 30)
 
 with open(BASE_DIR / 'sensor_data.csv', 'w', newline='') as f:
     writer = csv.writer(f)
