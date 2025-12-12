@@ -29,20 +29,20 @@ services:
     networks:
       - dbnet
 
-  clickhouse:
-    image: clickhouse/clickhouse-server:25.5-alpine
-    environment:
-      CLICKHOUSE_USER: datviruser
-      CLICKHOUSE_PASSWORD: datvirpass
-      CLICKHOUSE_DB: datvirdb
-    ports:
-      - "8123:8123"
-      - "9123:9000"
-    volumes:
-      - clickhouse_data:/var/lib/clickhouse
-      - ./clickhouse:/docker-entrypoint-initdb.d
-    networks:
-      - dbnet
+#  clickhouse:
+#    image: clickhouse/clickhouse-server:25.5-alpine
+#    environment:
+#      CLICKHOUSE_USER: datviruser
+#      CLICKHOUSE_PASSWORD: datvirpass
+#      CLICKHOUSE_DB: datvirdb
+#    ports:
+#      - "8123:8123"
+#      - "9123:9000"
+#    volumes:
+#      - clickhouse_data:/var/lib/clickhouse
+#      - ./clickhouse:/docker-entrypoint-initdb.d
+#    networks:
+#      - dbnet
 
   mongo:
     image: mongo:6.0.14
