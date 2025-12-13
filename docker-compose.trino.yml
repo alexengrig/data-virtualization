@@ -4,9 +4,9 @@ services:
   trino:
     image: trinodb/trino:475
     ports:
-      - "8080:8080"
+      - "8090:8080"
     volumes:
-      - ./trino/catalog/clickhouse.properties:/etc/trino/catalog/clickhouse.properties
+#      - ./trino/catalog/clickhouse.properties:/etc/trino/catalog/clickhouse.properties
       - ./trino/catalog/mongo.properties:/etc/trino/catalog/mongo.properties
       - ./trino/catalog/postgresql.properties:/etc/trino/catalog/postgresql.properties
       - ./trino/catalog/timescale.properties:/etc/trino/catalog/timescale.properties
